@@ -5,50 +5,52 @@ import { heroScenes } from "../../data/heroScenes.js";
 import "./Hero.css";
 
 const searchModes = [
-  { key: "doctors", label: "Doctors", path: "/doctors", placeholder: "Search doctors, specialties or clinics" },
-  { key: "medicines", label: "Medicines", path: "/medicines", placeholder: "Search medicines or pharmacies" },
-  { key: "labs", label: "Lab tests", path: "/lab-tests", placeholder: "Search tests or labs" },
+  { key: "doctors", label: "Doctors", icon: "stethoscope", path: "/doctors", placeholder: "Search doctors, specialties or clinics" },
+  { key: "medicines", label: "Medicines", icon: "storefront", path: "/medicines", placeholder: "Search medicines or pharmacies" },
+  { key: "labs", label: "Lab tests", icon: "flask", path: "/lab-tests", placeholder: "Search tests or labs" },
+];
+
+const trustChips = [
+  { icon: "shield-check", label: "NMC verified" },
+  { icon: "badge-check", label: "ABDM linked" },
+  { icon: "clock", label: "Live tracking" },
+  { icon: "heart-pulse", label: "12+ cities" },
 ];
 
 const TRANSITION_MS = 650;
 const HOLD_MS = 4200;
 
-const liveStats = [
-  { k: "ON-TIME", v: "94.2%", d: "last 7 days" },
-  { k: "TRACKED", v: "1,284", d: "appointments today" },
-  { k: "VERIFIED", v: "2,340+", d: "doctors" },
-  { k: "REACH", v: "12", d: "cities · live" },
-];
-
-function LiveTile({ scene }) {
+function Card({ scene }) {
   return (
     <>
-      <div className="live-tile__topbar">
-        <span className="live-tile__label">{scene.label}</span>
-        <span className="live-tile__live">
-          <span className="live-tile__pulse" /> LIVE
-        </span>
+      <div className="mock__topbar">
+        <span className="mock__title">Today's appointment</span>
+        <span className="mock__live"><span className="mock__pulse" /> Live</span>
       </div>
 
-      <div className="live-tile__who">
-        <span className="live-tile__avatar">
-          {scene.avatarIcon ? <Icon name={scene.avatarIcon} size={18} /> : scene.avatarText}
+      <div className="mock__doc">
+        <span className="mock__avatar">
+          {scene.avatarIcon ? <Icon name={scene.avatarIcon} size={20} /> : scene.avatarText}
         </span>
         <div>
           <strong>{scene.name}</strong>
-          <span className="live-tile__specialty">{scene.sub}</span>
+          <span>{scene.sub}</span>
         </div>
+        <span className="mock__badge"><Icon name="badge-check" size={12} filled /> Verified</span>
       </div>
 
-      <div className="live-tile__status">
-        <div className="live-tile__status-title">{scene.statusTitle}</div>
-        <div className="live-tile__status-sub">{scene.statusSub}</div>
+      <div className="mock__status">
+        <div>
+          <p className="mock__status-title">{scene.statusTitle}</p>
+          <p className="mock__status-sub">{scene.statusSub}</p>
+        </div>
+        <span className="mock__eta">ETA<br /><em>12 min</em></span>
       </div>
 
-      <div className="live-tile__timeline">
+      <div className="mock__timeline">
         {scene.timeline.map((step) => (
-          <div className={`live-tile__step ${step.active ? "is-active" : ""}`} key={step.label}>
-            <span className={`live-tile__dot ${step.done ? "is-done" : ""}`} />
+          <div className={`mock__step ${step.active ? "is-active" : ""}`} key={step.label}>
+            <span className={`mock__step-dot ${step.done ? "is-done" : ""}`} />
             <div>
               <p>{step.label}</p>
               <time>{step.t}</time>
@@ -57,9 +59,9 @@ function LiveTile({ scene }) {
         ))}
       </div>
 
-      <div className="live-tile__foot">
-        <button type="button" className="live-tile__cta">{scene.actions[0]}</button>
-        <button type="button" className="live-tile__cta live-tile__cta--ghost">{scene.actions[1]}</button>
+      <div className="mock__actions">
+        <button type="button" className="mock__btn mock__btn--primary">{scene.actions[0]}</button>
+        <button type="button" className="mock__btn">{scene.actions[1]}</button>
       </div>
     </>
   );
@@ -98,149 +100,110 @@ export default function Hero() {
   const incoming = transitioning ? heroScenes[nextIndex] : null;
 
   return (
-    <section className="hero-cinema">
-      <div className="hero-cinema__frame container">
-        {/* left: statement */}
-        <div className="hero-cinema__copy">
+    <section className="hero-fresh">
+      <div className="container hero-fresh__grid">
+        <div className="hero-fresh__copy reveal is-visible">
           <div className="eyebrow">
             <span className="dot" />
-            v1 · HEALTHCARE OPS LAYER
+            Trusted local healthcare · Live doctor tracking
           </div>
 
-          <h1 className="h1 hero-cinema__title">
-            The time you're given
+          <h1 className="h1 hero-fresh__title">
+            Healthcare that <em>shows up</em>
             <br />
-            is the time <em>that happens.</em>
+            on time. Every time.
           </h1>
 
-          <p className="lede hero-cinema__lede">
-            LocDoc is the operating layer for local healthcare — a live tracker for every
-            appointment, a verified doctor registry, and one honest place to find medicines
-            and lab tests near you.
+          <p className="lede hero-fresh__lede">
+            Book verified doctors near you, see nearby medicine stock in real time, and
+            compare lab tests — all in one calm, honest place.
           </p>
 
-          {/* Command-line style search */}
-          <form className="hero-cinema__cmd" onSubmit={handleSearch}>
-            <div className="hero-cinema__cmd-tabs">
+          {/* Search card */}
+          <div className="hero-fresh__search">
+            <div className="hero-fresh__tabs">
               {searchModes.map((m) => (
                 <button
                   key={m.key}
                   type="button"
-                  className={`hero-cinema__cmd-tab ${mode.key === m.key ? "is-active" : ""}`}
+                  className={`hero-fresh__tab ${mode.key === m.key ? "is-active" : ""}`}
                   onClick={() => setMode(m)}
                 >
+                  <Icon name={m.icon} size={16} />
                   {m.label}
                 </button>
               ))}
             </div>
-            <div className="hero-cinema__cmd-bar">
-              <span className="hero-cinema__cmd-prompt">/</span>
+            <form className="hero-fresh__search-row" onSubmit={handleSearch}>
+              <span className="hero-fresh__search-icon">
+                <Icon name="search" size={18} />
+              </span>
               <input
-                className="hero-cinema__cmd-input"
+                className="hero-fresh__search-input"
                 placeholder={mode.placeholder}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-              <span className="hero-cinema__cmd-loc">
-                <Icon name="map-pin" size={14} /> Hyderabad
+              <span className="hero-fresh__loc">
+                <Icon name="map-pin" size={15} /> Hyderabad
               </span>
-              <button className="hero-cinema__cmd-btn" type="submit">
+              <button className="hero-fresh__search-btn" type="submit">
+                <Icon name="search" size={16} />
                 <span>Search</span>
-                <Icon name="arrow-right" size={14} />
               </button>
-            </div>
-          </form>
-
-          <div className="hero-cinema__ctas">
-            <button className="btn btn-accent btn-lg" onClick={() => navigate("/doctors")}>
-              Find a doctor & book
-              <Icon name="arrow-right" size={16} />
-            </button>
-            <button className="btn btn-ghost btn-lg" onClick={() => navigate("/login?role=patient&intent=signup")}>
-              Create account
-            </button>
+            </form>
           </div>
 
-          <Link to="/#register" className="hero-cinema__supply">
-            <Icon name="storefront" size={14} />
-            Run a hospital, pharmacy or lab? Onboard your facility →
+          {/* Trust chips */}
+          <div className="hero-fresh__chips">
+            {trustChips.map((c) => (
+              <span className="hero-fresh__chip" key={c.label}>
+                <Icon name={c.icon} size={14} /> {c.label}
+              </span>
+            ))}
+          </div>
+
+          <Link to="/#register" className="hero-fresh__supply">
+            Run a hospital, pharmacy or lab? <strong>List your facility</strong>
+            <Icon name="arrow-right" size={14} />
           </Link>
         </div>
 
-        {/* right: live console */}
         <div
-          className="hero-cinema__console"
+          className="hero-fresh__visual reveal is-visible"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="hero-cinema__console-chrome">
-            <span className="hero-cinema__chip"><span /><span /><span /></span>
-            <span className="hero-cinema__console-title">locdoc / live-ops</span>
-            <span className="hero-cinema__console-time">TSMC · NMC · ABDM synced</span>
+          <div className="hero-fresh__blob" aria-hidden="true" />
+
+          <div className="mock-stage">
+            <div className={`mock ${transitioning ? "is-out" : ""}`}>
+              <Card scene={current} />
+            </div>
+            {incoming && (
+              <div className="mock mock--incoming is-in">
+                <Card scene={incoming} />
+              </div>
+            )}
           </div>
 
-          <div className="hero-cinema__console-body">
-            <div className="live-tile-stage">
-              <div className={`live-tile ${transitioning ? "is-out" : ""}`}>
-                <LiveTile scene={current} />
-              </div>
-              {incoming && (
-                <div className="live-tile live-tile--incoming is-in">
-                  <LiveTile scene={incoming} />
-                </div>
-              )}
-            </div>
-
-            <div className="live-side">
-              <div className="live-side__card">
-                <div className="live-side__k">DOCTOR</div>
-                <div className="live-side__v">
-                  Verified <br />
-                  <span>NMC · ABDM · TSMC</span>
-                </div>
-              </div>
-              <div className="live-side__card live-side__card--accent">
-                <div className="live-side__k">PUNCTUALITY</div>
-                <div className="live-side__v live-side__v--big">94.2%</div>
-                <div className="live-side__spark">
-                  <svg viewBox="0 0 120 40" preserveAspectRatio="none">
-                    <polyline
-                      points="0,30 15,26 30,28 45,20 60,22 75,14 90,16 105,8 120,10"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="live-side__card">
-                <div className="live-side__k">NEXT PATIENT</div>
-                <div className="live-side__v">
-                  <span className="live-side__eta">ETA 4:42 PM</span>
-                  <em>notified via SMS · WhatsApp</em>
-                </div>
-              </div>
+          {/* Floating badges */}
+          <div className="hero-fresh__float hero-fresh__float--top">
+            <span className="hero-fresh__float-icon"><Icon name="bell" size={14} /></span>
+            <div>
+              <strong>SMS alert sent</strong>
+              <span>Delay notified in 41s</span>
             </div>
           </div>
-
-          <div className="hero-cinema__console-status">
-            <span><span className="live-tile__pulse" /> streaming · 1.2k events / min</span>
-            <span>vitals ok</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Marquee of live stats */}
-      <div className="hero-cinema__marquee" aria-hidden="true">
-        <div className="hero-cinema__marquee-track">
-          {[...liveStats, ...liveStats, ...liveStats].map((s, i) => (
-            <div className="hero-cinema__marquee-item" key={i}>
-              <span className="hero-cinema__mk">{s.k}</span>
-              <span className="hero-cinema__mv">{s.v}</span>
-              <span className="hero-cinema__md">{s.d}</span>
-              <span className="hero-cinema__mdot" />
+          <div className="hero-fresh__float hero-fresh__float--bottom">
+            <span className="hero-fresh__float-icon hero-fresh__float-icon--star">
+              <Icon name="star" size={14} filled />
+            </span>
+            <div>
+              <strong>4.9 average</strong>
+              <span>Punctuality rating</span>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

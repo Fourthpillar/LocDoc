@@ -30,7 +30,6 @@ function ScrollManager() {
 export default function App() {
   return (
     <div className="app-shell">
-      <div className="aurora-canvas" aria-hidden="true" />
       <ScrollManager />
       <Navbar />
       <main>
