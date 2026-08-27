@@ -1,0 +1,94 @@
+.medicine-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.medicine-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.medicine-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.medicine-card__form {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.medicine-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.medicine-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.medicine-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.medicine-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.medicine-card__rating svg {
+  color: #f59e0b;
+}
+.medicine-card__rating em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-soft);
+}
+
+.medicine-card__updated {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  color: var(--text-soft);
+}
+
+.medicine-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.medicine-card__price-label {
+  font-size: 0.72rem;
+  color: var(--text-soft);
+}
+
+.medicine-card__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--text);
+}

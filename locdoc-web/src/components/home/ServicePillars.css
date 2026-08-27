@@ -1,0 +1,42 @@
+.pillars {
+  padding: 8px 0 56px;
+}
+
+.pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.pillar {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--gradient-brand-soft);
+  color: var(--primary-2);
+  margin-bottom: 16px;
+}
+
+.pillar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-2);
+}
+
+@media (max-width: 900px) {
+  .pillars__grid {
+    grid-template-columns: 1fr;
+  }
+}

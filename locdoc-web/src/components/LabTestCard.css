@@ -1,0 +1,85 @@
+.labtest-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.labtest-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.labtest-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.labtest-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.labtest-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.labtest-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.labtest-card__row {
+  display: flex;
+  align-items: center;
+}
+
+.labtest-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.labtest-card__rating svg {
+  color: #f59e0b;
+}
+.labtest-card__rating em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-soft);
+}
+
+.labtest-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.labtest-card__price-label {
+  font-size: 0.72rem;
+  color: var(--text-soft);
+}
+
+.labtest-card__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--text);
+}

@@ -1,0 +1,58 @@
+// Content for the rotating phone-mock preview in the hero — one scene per
+// core service, sharing the same card layout.
+export const heroScenes = [
+  {
+    key: "doctor",
+    label: "Today's appointment",
+    avatarText: "KM",
+    name: "Dr. Karthik Menon",
+    sub: "Cardiologist · Trinity Heart Institute",
+    statusTitle: "In Transit",
+    statusSub: "ETA 12 min · originally 4:30 PM",
+    timeline: [
+      { t: "4:02 PM", label: "Confirmed by you", done: true },
+      { t: "4:18 PM", label: "Doctor marked In Transit", done: true },
+      { t: "4:21 PM", label: "Delay detected — 12 min", done: true },
+      { t: "4:42 PM", label: "New expected time", done: false, active: true },
+    ],
+    actions: ["Accept new time", "Reschedule"],
+    floatingTop: { icon: "bell", text: "Patient notified in 41 seconds" },
+    floatingBottom: { icon: "trending-up", text: "Punctuality: Usually on time" },
+  },
+  {
+    key: "medicine",
+    label: "Your medicine order",
+    avatarIcon: "storefront",
+    name: "Apollo Pharmacy",
+    sub: "Paracetamol 650mg · Strip of 15",
+    statusTitle: "Ready for pickup",
+    statusSub: "Hold expires in 3 hrs · ₹32",
+    timeline: [
+      { t: "2:10 PM", label: "Order placed", done: true },
+      { t: "2:14 PM", label: "Pharmacy accepted", done: true },
+      { t: "2:14 PM", label: "Stock reserved", done: true },
+      { t: "2:20 PM", label: "Ready for pickup", done: false, active: true },
+    ],
+    actions: ["Get directions", "Cancel hold"],
+    floatingTop: { icon: "bell", text: "Stock confirmed in 9 seconds" },
+    floatingBottom: { icon: "trending-up", text: "Reservation reliability: 96%" },
+  },
+  {
+    key: "lab",
+    label: "Your lab test",
+    avatarIcon: "flask",
+    name: "Vijaya Diagnostics",
+    sub: "Complete Blood Count (CBC)",
+    statusTitle: "Sample collected",
+    statusSub: "Report expected by 6:00 PM today",
+    timeline: [
+      { t: "8:00 AM", label: "Test booked", done: true },
+      { t: "8:30 AM", label: "Technician assigned", done: true },
+      { t: "9:15 AM", label: "Sample collected", done: true },
+      { t: "9:20 AM", label: "Report processing", done: false, active: true },
+    ],
+    actions: ["Track report", "Reschedule visit"],
+    floatingTop: { icon: "bell", text: "Report ready in ~3 hrs" },
+    floatingBottom: { icon: "shield-check", text: "Lab-verified result" },
+  },
+];

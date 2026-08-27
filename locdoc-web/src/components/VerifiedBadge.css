@@ -1,0 +1,28 @@
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0ea5e9, #4338ca);
+  padding: 3px 9px 3px 6px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .verified-badge {
+  background: linear-gradient(135deg, #22d3ee, #818cf8);
+  color: #06070c;
+}
+
+.verified-badge--sm .verified-badge__label {
+  display: none;
+}
+
+.verified-badge--sm {
+  padding: 4px;
+  border-radius: 50%;
+}

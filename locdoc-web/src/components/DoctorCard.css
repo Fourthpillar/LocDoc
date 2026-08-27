@@ -1,0 +1,110 @@
+.doctor-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.doctor-card__head {
+  display: flex;
+  gap: 14px;
+}
+
+.doctor-card__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--gradient-brand);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.doctor-card__name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.doctor-card__specialty {
+  font-size: 0.83rem;
+  color: var(--primary-2);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.doctor-card__qual {
+  font-size: 0.76rem;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.doctor-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.doctor-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.doctor-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.doctor-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.doctor-card__rating svg {
+  color: #f59e0b;
+}
+
+.doctor-card__rating em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-soft);
+}
+
+.doctor-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.doctor-card__fee-label {
+  font-size: 0.72rem;
+  color: var(--text-soft);
+}
+
+.doctor-card__fee {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+}

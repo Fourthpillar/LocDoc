@@ -1,0 +1,59 @@
+.specialties__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.specialty-card {
+  padding: 22px 18px;
+  text-align: left;
+}
+
+.specialty-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--gradient-brand-soft);
+  color: var(--primary-2);
+  margin-bottom: 14px;
+}
+
+.specialty-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.specialty-card__blurb {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  min-height: 34px;
+}
+
+.specialty-card__count {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@media (max-width: 1080px) {
+  .specialties__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 720px) {
+  .specialties__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .specialties__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
