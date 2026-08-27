@@ -45,6 +45,13 @@
   line-height: 1.5;
 }
 
+.auth-art {
+  margin-top: 40px;
+  max-width: 420px;
+  filter: drop-shadow(0 24px 44px rgba(15, 27, 44, 0.10));
+}
+.auth-art__svg { width: 100%; height: auto; }
+
 .auth-page__form {
   display: flex;
   align-items: center;

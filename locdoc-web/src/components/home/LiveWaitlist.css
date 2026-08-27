@@ -1,0 +1,188 @@
+.wait { padding: 40px 0 20px; }
+
+.wait__band {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 40px;
+  align-items: center;
+  padding: 32px 36px;
+  border-radius: 28px;
+  background:
+    radial-gradient(140% 120% at 100% 0%, var(--accent-soft) 0%, transparent 55%),
+    var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.wait__side { min-width: 0; position: relative; padding-left: 24px; }
+
+.wait__pulse {
+  position: absolute;
+  left: 0; top: 8px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(8, 145, 178, 0.5);
+  animation: wait-pulse 1.6s ease-in-out infinite;
+}
+@keyframes wait-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(8, 145, 178, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(8, 145, 178, 0); }
+}
+
+.wait__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.wait__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+.wait__ahead {
+  color: var(--primary-2);
+  white-space: nowrap;
+}
+
+.wait__desc {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+/* Card */
+.wait__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 20px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+}
+
+.wait__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 0.6;
+  cursor: default;
+}
+.wait__row.is-active {
+  opacity: 1;
+  transform: translateX(4px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.wait__row-badge {
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.wait__row--ok .wait__row-badge {
+  background: var(--primary-soft);
+  border-color: transparent;
+  color: var(--primary-2);
+}
+.wait__row--warn .wait__row-badge {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+
+.wait__row-body { min-width: 0; }
+.wait__row-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.94rem;
+}
+.wait__row-title strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.wait__row-title span {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+.wait__row-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  font-size: 0.79rem;
+  color: var(--text-soft);
+}
+.wait__row-sub svg { color: var(--text-soft); }
+
+.wait__row-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.wait__row-status--ok {
+  color: var(--primary-2);
+  background: var(--primary-soft);
+}
+.wait__row-status--warn {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.wait__row-status .wait__dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+  animation: wait-pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes wait-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+@media (max-width: 900px) {
+  .wait__band { grid-template-columns: 1fr; padding: 24px; }
+  .wait__row { grid-template-columns: auto 1fr; }
+  .wait__row-status { grid-column: 1 / -1; justify-self: flex-start; }
+}
