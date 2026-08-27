@@ -255,6 +255,24 @@ const paths = {
       <circle cx="17.3" cy="6.7" r="1" />
     </>
   ),
+  quote: (
+    <>
+      <path d="M7 7c-2 0-3 1.5-3 3.5V17h5v-6H6c0-1.5.6-3 2-3Z" />
+      <path d="M17 7c-2 0-3 1.5-3 3.5V17h5v-6h-3c0-1.5.6-3 2-3Z" />
+    </>
+  ),
+  "arrow-left": (
+    <>
+      <path d="M19 12H5" />
+      <path d="M12 19 5 12l7-7" />
+    </>
+  ),
+  user: (
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+    </>
+  ),
 };
 
 export default function Icon({ name, size = 22, strokeWidth = 1.8, className = "", filled = false }) {

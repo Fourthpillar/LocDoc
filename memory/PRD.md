@@ -44,6 +44,19 @@ LocDoc is a marketing/product website for a SaaS healthcare platform designed to
 - ✅ **Live Waitlist Widget** (`components/home/LiveWaitlist.jsx` + `.css`) — "You'd be N people behind" headline that rotates through 4 real-looking clinics every 3.6 s (auto-pauses on hover). Right side is a live queue card with #-badges, doctor/specialty/clinic rows, and colour-coded status pills (On time · In transit · Delayed · Ready now). Inserted between ServicePillars and SpecialtiesGrid.
 - ✅ **Facility Screenshot Preview** (`components/home/FacilityPreview.jsx` + `.css`) — Full "Platform Admin" console mock in a browser chrome (URL bar, Streaming indicator), with LocDoc Admin sidebar (facility name verified, Live queue / Appointments / Doctors / Pharmacy / Labs / Notifications), and a main pane showing today's live queue title, 94% on-time pill, 3 KPI cards (In queue / Delay alerts sent / Waitlist backfill), and a 4-doctor roster with coloured status pills and slot text. Sits between DoctorVerification and RegisterBusiness on Home.
 
+### Follow-up enhancements (Jan 2026, fourth pass)
+- ✅ **Onboarding Progress Tracker** (`components/OnboardingTracker.jsx` + `.css`) — Auto-advancing vertical stepper wired into both `pages/RegisterFacility.jsx` and `pages/RegisterDoctor.jsx` success screens. Steps go through `Submitted → Verifying → Credentials sent / Badge live`, with a pulsing brand-glow ring on the current node, animated spinner dots, per-state pills (Done / Running / Queued), a filling gradient rail between nodes, and copy that dynamically references the submitted facility name, registration council and email.
+- ✅ **Facility Reviews Wall** (`components/home/FacilityReviews.jsx` + `.css`) — Dual-row scrolling testimonial wall (opposite directions, pauses on hover) with 8 real-sounding partner quotes across clinics, pharmacies, labs and doctors. Each card has an avatar, name + role, and a color-coded role tag. Inserted directly below the FacilityPreview mock on Home. Also added a new `quote` icon glyph to `Icon.jsx`.
+- ✅ **Doctor Detail Page** (`pages/DoctorDetail.jsx` + `.css`) — New route `/doctors/:id`:
+  - Hero with large gradient avatar, verified badge, specialty / qualifications / experience, facility, area and rating chips, and a sticky booking side-panel showing fee, punctuality with rolling 7-day % (pulse dot), and a "Book a visit" CTA.
+  - **Punctuality history** section with a 14-day bar chart (color-coded on-time bands), 7-day average, and a legend.
+  - **Registration checks** card (NMC · ABDM NMR · state council) plus a languages pane.
+  - **Next available slots** across three days with NEXT 2H / POPULAR tags — clicking any slot opens the booking modal.
+  - **Booking flow preview** as a 4-step card (Pick a slot → Confirm details → SMS + WhatsApp → Walk in on time).
+  - Booking modal uses the shared `OnboardingTracker` component to run through Slot held → Sending OTP → Confirmed live.
+- ✅ **DoctorCard link-through** — `components/DoctorCard.jsx` now wraps the avatar/name in a `Link` to `/doctors/:id` and adds a secondary "View profile" ghost button alongside "Book visit".
+- ✅ **Icon additions** — Added `arrow-left`, `user` and `quote` glyphs to `components/Icon.jsx`.
+
 ## Verified pages (via screenshots)
 Home hero · Home services · Home specialties · Home clinics · Home verification · Home register · Doctors listing · Login · Register facility · About.
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import VerifiedBadge from "../components/VerifiedBadge.jsx";
+import OnboardingTracker from "../components/OnboardingTracker.jsx";
 import { specialties } from "../data/specialties.js";
 import "./RegisterForm.css";
 import "./RegisterDoctor.css";
@@ -69,18 +70,27 @@ export default function RegisterDoctor() {
             and get your profile live.
           </p>
           <div className="register-form__timeline">
-            <div className="register-form__timeline-step is-done">
-              <Icon name="check" size={15} />
-              <span>Details &amp; registration number submitted</span>
-            </div>
-            <div className="register-form__timeline-step is-done">
-              <Icon name="check" size={15} />
-              <span>Matched against NMC / ABDM NMR / {form.council.split(" (")[0]}</span>
-            </div>
-            <div className="register-form__timeline-step">
-              <Icon name="badge-check" size={15} />
-              <span>Verified badge added to your public profile</span>
-            </div>
+            <OnboardingTracker
+              stepDurations={[1200, 3800, 0]}
+              steps={[
+                {
+                  icon: "file-text",
+                  title: "Submitted",
+                  desc: `Registration ID ${form.regId || "captured"} received with your details.`,
+                },
+                {
+                  icon: "shield-check",
+                  title: "Verifying against registries",
+                  desc: `Cross-checking NMC · ABDM NMR · ${form.council.split(" (")[0] || "your state council"}.`,
+                  doingHint: "Real registry pings usually finish in under 2 minutes…",
+                },
+                {
+                  icon: "badge-check",
+                  title: "Verified badge live",
+                  desc: "Your public profile will show a check like a blue-tick — visible to every patient at booking.",
+                },
+              ]}
+            />
           </div>
           <p className="body-text mt-24">
             This is a product preview — no backend is connected yet, so no real registry lookup

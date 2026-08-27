@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import FindDoctors from "./pages/FindDoctors.jsx";
+import DoctorDetail from "./pages/DoctorDetail.jsx";
 import Medicines from "./pages/Medicines.jsx";
 import LabTests from "./pages/LabTests.jsx";
 import RegisterFacility from "./pages/RegisterFacility.jsx";
@@ -36,6 +37,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/doctors" element={<FindDoctors />} />
+          <Route path="/doctors/:id" element={<DoctorDetail />} />
           <Route path="/medicines" element={<Medicines />} />
           <Route path="/lab-tests" element={<LabTests />} />
           <Route path="/register/hospital" element={<RegisterFacility type="hospital" />} />

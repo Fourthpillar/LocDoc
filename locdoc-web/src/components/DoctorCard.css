@@ -8,7 +8,12 @@
 .doctor-card__head {
   display: flex;
   gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
+.doctor-card__head:hover { opacity: 0.9; }
+.doctor-card__head:hover .doctor-card__name { color: var(--primary-2); }
 
 .doctor-card__avatar {
   width: 52px;
@@ -107,4 +112,13 @@
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--text);
+}
+
+.doctor-card__actions {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+@media (max-width: 420px) {
+  .doctor-card__actions { flex-direction: column-reverse; align-items: stretch; }
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Icon from "./Icon.jsx";
 import VerifiedBadge from "./VerifiedBadge.jsx";
 import "./DoctorCard.css";
@@ -18,7 +19,7 @@ export default function DoctorCard({ doctor, onBook }) {
 
   return (
     <div className="doctor-card card card--hover">
-      <div className="doctor-card__head">
+      <Link to={`/doctors/${doctor.id}`} className="doctor-card__head">
         <span className="doctor-card__avatar">{initials}</span>
         <div className="doctor-card__id">
           <p className="doctor-card__name">
@@ -27,7 +28,7 @@ export default function DoctorCard({ doctor, onBook }) {
           <p className="doctor-card__specialty">{doctor.specialty}</p>
           <p className="doctor-card__qual">{doctor.qualifications} · {doctor.experience} yrs exp.</p>
         </div>
-      </div>
+      </Link>
 
       <div className="doctor-card__meta">
         <span>
@@ -53,9 +54,12 @@ export default function DoctorCard({ doctor, onBook }) {
           <p className="doctor-card__fee-label">Consultation fee</p>
           <p className="doctor-card__fee">₹{doctor.fee}</p>
         </div>
-        <button className="btn btn-primary btn-sm" onClick={() => onBook?.(doctor)}>
-          Book visit
-        </button>
+        <div className="doctor-card__actions">
+          <Link to={`/doctors/${doctor.id}`} className="btn btn-ghost btn-sm">View profile</Link>
+          <button className="btn btn-primary btn-sm" onClick={() => onBook?.(doctor)}>
+            Book visit
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
+import OnboardingTracker from "../components/OnboardingTracker.jsx";
 import { registrationTypes } from "../data/registrationTypes.js";
 import "./RegisterForm.css";
 
@@ -93,20 +94,28 @@ export default function RegisterFacility({ type }) {
             Thanks, {form.contactName || "there"} — <strong>{form.facilityName}</strong> is now in
             our onboarding queue.
           </p>
-          <div className="register-form__timeline">
-            <div className="register-form__timeline-step is-done">
-              <Icon name="check" size={15} />
-              <span>Details &amp; certificate submitted</span>
-            </div>
-            <div className="register-form__timeline-step">
-              <Icon name="shield-check" size={15} />
-              <span>Certificate &amp; registration background-check</span>
-            </div>
-            <div className="register-form__timeline-step">
-              <Icon name="mail" size={15} />
-              <span>Credentials emailed to {form.email || "your inbox"}</span>
-            </div>
-          </div>
+
+          <OnboardingTracker
+            stepDurations={[1400, 3600, 0]}
+            steps={[
+              {
+                icon: "upload",
+                title: "Submitted",
+                desc: "Details, certificate and geo-location captured.",
+              },
+              {
+                icon: "shield-check",
+                title: "Verifying registration",
+                desc: `Certificate ${form.regNumber || "number"} cross-checked with the ${config.registryName || "state health registry"}.`,
+                doingHint: "Usually done in under 90 seconds…",
+              },
+              {
+                icon: "mail",
+                title: "Credentials sent",
+                desc: `Login link and admin console access will land at ${form.email || "your inbox"}.`,
+              },
+            ]}
+          />
           <p className="body-text mt-24">
             This is a product preview — no backend is connected yet, so nothing has actually been
             sent. Once LocDoc's verification service is live, this is exactly the flow your
