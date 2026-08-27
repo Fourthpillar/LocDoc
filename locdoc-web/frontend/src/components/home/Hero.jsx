@@ -24,7 +24,7 @@ function Card({ scene }) {
   return (
     <>
       <div className="mock__topbar">
-        <span className="mock__title">Today's appointment</span>
+        <span className="mock__title">{scene.label}</span>
         <span className="mock__live"><span className="mock__pulse" /> Live</span>
       </div>
 
@@ -154,6 +154,17 @@ export default function Hero() {
             </form>
           </div>
 
+          {/* CTAs */}
+          <div className="hero-fresh__ctas">
+            <button className="btn btn-primary" type="button" onClick={() => navigate("/doctors")}>
+              Find a doctor & book
+              <Icon name="arrow-right" size={16} />
+            </button>
+            <button className="btn btn-ghost" type="button" onClick={() => navigate("/login?role=patient&intent=signup")}>
+              Create your account
+            </button>
+          </div>
+
           {/* Trust chips */}
           <div className="hero-fresh__chips">
             {trustChips.map((c) => (
@@ -177,33 +188,36 @@ export default function Hero() {
           <div className="hero-fresh__blob" aria-hidden="true" />
 
           <div className="mock-stage">
-            <div className={`mock ${transitioning ? "is-out" : ""}`}>
-              <Card scene={current} />
-            </div>
-            {incoming && (
-              <div className="mock mock--incoming is-in">
-                <Card scene={incoming} />
+            <div className="mock-window">
+              <div className={`mock ${transitioning ? "is-out" : ""}`}>
+                <Card scene={current} />
               </div>
-            )}
+              {incoming && (
+                <div className="mock mock--incoming is-in">
+                  <Card scene={incoming} />
+                </div>
+              )}
+            </div>
+
+            {/* Floating badges — sit outside the card, never over its content */}
+            <div className="hero-fresh__float hero-fresh__float--top">
+              <span className="hero-fresh__float-icon"><Icon name="bell" size={14} /></span>
+              <div>
+                <strong>SMS alert sent</strong>
+                <span>Delay notified in 41s</span>
+              </div>
+            </div>
+            <div className="hero-fresh__float hero-fresh__float--bottom">
+              <span className="hero-fresh__float-icon hero-fresh__float-icon--star">
+                <Icon name="star" size={14} filled />
+              </span>
+              <div>
+                <strong>4.9 average</strong>
+                <span>Punctuality rating</span>
+              </div>
+            </div>
           </div>
 
-          {/* Floating badges */}
-          <div className="hero-fresh__float hero-fresh__float--top">
-            <span className="hero-fresh__float-icon"><Icon name="bell" size={14} /></span>
-            <div>
-              <strong>SMS alert sent</strong>
-              <span>Delay notified in 41s</span>
-            </div>
-          </div>
-          <div className="hero-fresh__float hero-fresh__float--bottom">
-            <span className="hero-fresh__float-icon hero-fresh__float-icon--star">
-              <Icon name="star" size={14} filled />
-            </span>
-            <div>
-              <strong>4.9 average</strong>
-              <span>Punctuality rating</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

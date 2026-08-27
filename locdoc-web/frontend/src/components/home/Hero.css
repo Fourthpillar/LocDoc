@@ -3,7 +3,7 @@
    ============================================================ */
 
 .hero-fresh {
-  padding: 80px 0 40px;
+  padding: 56px 0 28px;
   position: relative;
 }
 
@@ -118,6 +118,16 @@
   background: var(--primary-2);
 }
 
+/* --- CTAs --- */
+.hero-fresh__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.hero-fresh__ctas .btn-primary svg { flex-shrink: 0; }
+
 /* --- trust chips --- */
 .hero-fresh__chips {
   display: flex;
@@ -161,7 +171,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  /* top/bottom room for the floating badges that sit outside the card */
+  padding: 74px 0;
 }
 
 .hero-fresh__blob {
@@ -188,28 +199,39 @@
   max-width: 100%;
 }
 
+.mock-window {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+}
+
 .mock {
+  /* Both cards share this one grid cell instead of the incoming card being
+     absolutely stretched to the outgoing card's box — each keeps its own
+     natural height, so the horizontal slide never drags in a vertical shift. */
+  grid-area: 1 / 1;
   position: relative;
   width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 26px;
-  box-shadow: var(--shadow-lg);
   padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.mock--incoming { position: absolute; inset: 0; }
+.mock--incoming { z-index: 1; }
 .mock.is-out { animation: outSlide 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 .mock.is-in  { animation: inSlide  650ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 @keyframes outSlide {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-16px); }
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-100%); }
 }
 @keyframes inSlide {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .mock__topbar {
@@ -427,12 +449,20 @@
   background: var(--accent-soft);
   color: var(--accent);
 }
-.hero-fresh__float--top { top: 4%; left: -14px; animation-delay: 0.4s; }
-.hero-fresh__float--bottom { bottom: 6%; right: -12px; animation-delay: 1.2s; }
+.hero-fresh__float--top {
+  bottom: calc(100% + 16px);
+  left: -10px;
+  animation-delay: 0.4s;
+}
+.hero-fresh__float--bottom {
+  top: calc(100% + 16px);
+  right: -10px;
+  animation-delay: 1.2s;
+}
 
 @keyframes floaty {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
+  50%      { transform: translateY(-6px); }
 }
 
 /* --- responsive --- */
@@ -440,9 +470,14 @@
   .hero-fresh__grid { grid-template-columns: 1fr; gap: 56px; }
   .hero-fresh__copy { max-width: 100%; }
 }
+@media (max-width: 1080px) {
+  .hero-fresh__float--top { left: 0; }
+  .hero-fresh__float--bottom { right: 0; }
+}
 @media (max-width: 640px) {
   .hero-fresh__search-row { flex-wrap: wrap; padding: 12px; }
   .hero-fresh__loc { padding: 0; border: none; }
   .hero-fresh__search-btn { width: 100%; justify-content: center; }
   .hero-fresh__float { display: none; }
+  .hero-fresh__visual { padding: 20px 0; }
 }

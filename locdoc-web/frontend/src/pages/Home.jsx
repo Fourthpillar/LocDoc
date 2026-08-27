@@ -6,10 +6,8 @@ import ServicePillars from "../components/home/ServicePillars.jsx";
 import SpecialtiesGrid from "../components/SpecialtiesGrid.jsx";
 import TopClinics from "../components/TopClinics.jsx";
 import DoctorVerification from "../components/home/DoctorVerification.jsx";
-import FacilityPreview from "../components/home/FacilityPreview.jsx";
 import FacilityReviews from "../components/home/FacilityReviews.jsx";
 import RegisterBusiness from "../components/home/RegisterBusiness.jsx";
-import CtaBanner from "../components/home/CtaBanner.jsx";
 import { useReveal } from "../hooks/useReveal.js";
 
 export default function Home() {
@@ -27,10 +25,8 @@ export default function Home() {
       <SpecialtiesGrid />
       <TopClinics limit={4} />
       <DoctorVerification />
-      <FacilityPreview />
       <FacilityReviews />
       <RegisterBusiness />
-      <CtaBanner />
     </>
   );
 }

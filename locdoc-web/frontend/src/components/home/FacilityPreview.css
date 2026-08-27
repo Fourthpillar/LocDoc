@@ -52,13 +52,37 @@
 }
 
 /* --- Mock window --- */
-.fp__mock {
+.fp__stage { position: relative; }
+
+.fp__window {
   position: relative;
+  overflow: hidden;
   border-radius: 22px;
   background: var(--bg-raise);
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow-lg);
+  display: grid;
+}
+
+/* Both scenes share this one grid cell — each keeps its own natural height
+   and only translateX animates, so the horizontal rotation never drags in
+   a vertical shift (see Hero's mock-window for the same pattern). */
+.fp__mock {
+  grid-area: 1 / 1;
+  position: relative;
+  border-radius: 22px;
   overflow: hidden;
+}
+.fp__mock--incoming { z-index: 1; }
+.fp__mock.is-out { animation: fpOutSlide 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.fp__mock.is-in  { animation: fpInSlide  650ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes fpOutSlide {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-100%); }
+}
+@keyframes fpInSlide {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .fp__chrome {
@@ -316,6 +340,7 @@
 .fp__roster-row:last-child { border-bottom: none; }
 
 .fp__doc { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.fp__doc > div { min-width: 0; }
 .fp__avatar {
   width: 30px; height: 30px;
   border-radius: 10px;
@@ -332,6 +357,9 @@
   font-weight: 700;
   color: var(--text);
   line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .fp__doc em {
   display: block;
@@ -339,6 +367,9 @@
   font-size: 0.72rem;
   color: var(--text-muted);
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fp__status {

@@ -12,6 +12,7 @@ import RegisterFacility from "./pages/RegisterFacility.jsx";
 import RegisterDoctor from "./pages/RegisterDoctor.jsx";
 import Login from "./pages/Login.jsx";
 import About from "./pages/About.jsx";
+import Platform from "./pages/Platform.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 function ScrollManager() {
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Navigate to="/login" replace />} />
           <Route path="/about" element={<About />} />
+          <Route path="/platform" element={<Platform />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

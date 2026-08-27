@@ -133,6 +133,9 @@ export default function Navbar() {
           <NavLink to="/register/doctor" className="nav__link">
             For Doctors
           </NavLink>
+          <NavLink to="/platform" className="nav__link">
+            Platform
+          </NavLink>
           <NavLink to="/about" className="nav__link">
             About
           </NavLink>
@@ -167,6 +170,9 @@ export default function Navbar() {
           ))}
           <NavLink to="/register/doctor" className="nav__mobile-link">
             For Doctors
+          </NavLink>
+          <NavLink to="/platform" className="nav__mobile-link">
+            Platform
           </NavLink>
           <NavLink to="/about" className="nav__mobile-link">
             About

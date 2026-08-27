@@ -1,15 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../Icon.jsx";
+import { platformScenes } from "../../data/platformScenes.js";
 import "./FacilityPreview.css";
-
-const roster = [
-  { init: "AR", name: "Dr. Anjali Rao",     spec: "Gynaecology", status: "on-time",  slot: "In consult · 4:12 PM" },
-  { init: "KM", name: "Dr. Karthik Menon",  spec: "Cardiology",  status: "transit",  slot: "In transit · ETA 12m" },
-  { init: "SI", name: "Dr. Sneha Iyer",     spec: "Paediatrics", status: "on-time",  slot: "Available · next slot 4:30" },
-  { init: "AK", name: "Dr. Ayesha Khan",    spec: "Psychiatry",  status: "delayed",  slot: "Delayed 8m · reschedule sent" },
-];
-
-const statusLabel = { "on-time": "On time", "transit": "In transit", "delayed": "Delayed" };
 
 const benefits = [
   { icon: "activity",  title: "Live roster & queue", desc: "See every doctor's real status and today's waitlist at a glance." },
@@ -18,7 +11,116 @@ const benefits = [
   { icon: "layers",    title: "Adopt on your terms", desc: "Turn on Pharmacy or Labs modules only when you're ready." },
 ];
 
+const TRANSITION_MS = 650;
+const HOLD_MS = 5000;
+
+function DashboardMock({ scene }) {
+  return (
+    <>
+      {/* Window chrome */}
+      <div className="fp__chrome">
+        <span className="fp__chip"><span /><span /><span /></span>
+        <span className="fp__url">
+          <Icon name="shield-check" size={12} />
+          admin.locdoc.in / dashboard
+        </span>
+        <span className="fp__chrome-right">
+          <span className="fp__chrome-dot" /> Streaming
+        </span>
+      </div>
+
+      <div className="fp__body">
+        {/* Side rail */}
+        <aside className="fp__side">
+          <div className="fp__brand-mini">
+            <span className="fp__brand-mark"><Icon name="map-pin" size={12} strokeWidth={2.2} /></span>
+            LocDoc Admin
+          </div>
+          <div className="fp__facility">
+            <span>{scene.facility}</span>
+            <em>{scene.location}</em>
+          </div>
+          <nav className="fp__nav">
+            {scene.nav.map((n) => (
+              <a key={n.label} className={n.active ? "is-active" : ""}>
+                <Icon name={n.icon} size={14} />{n.label}
+              </a>
+            ))}
+          </nav>
+        </aside>
+
+        {/* Main */}
+        <div className="fp__main">
+          <div className="fp__topline">
+            <div>
+              <h4>{scene.topline.title}</h4>
+              <p>{scene.topline.sub}</p>
+            </div>
+            <div className="fp__pill fp__pill--ok">
+              <span className="fp__pill-dot" /> {scene.pill}
+            </div>
+          </div>
+
+          <div className="fp__kpis">
+            {scene.kpis.map((kpi) => (
+              <div className={`fp__kpi ${kpi.accent ? "fp__kpi--accent" : ""}`} key={kpi.k}>
+                <span className="fp__kpi-k">{kpi.k}</span>
+                <span className="fp__kpi-v">{kpi.v}</span>
+                <span className="fp__kpi-h">{kpi.h}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="fp__roster">
+            <div className="fp__roster-head">
+              {scene.rosterHead.map((h) => <span key={h}>{h}</span>)}
+            </div>
+            {scene.roster.map((r) => (
+              <div className="fp__roster-row" key={r.init + r.name}>
+                <div className="fp__doc">
+                  <span className="fp__avatar">{r.init}</span>
+                  <div>
+                    <strong>{r.name}</strong>
+                    <em>{r.spec}</em>
+                  </div>
+                </div>
+                <span className={`fp__status fp__status--${r.status}`}>
+                  <span className="fp__status-dot" /> {scene.statusLabel[r.status]}
+                </span>
+                <span className="fp__slot">{r.slot}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function FacilityPreview() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || nextIndex !== null) return undefined;
+    const t = setTimeout(() => setNextIndex((currentIndex + 1) % platformScenes.length), HOLD_MS);
+    return () => clearTimeout(t);
+  }, [paused, currentIndex, nextIndex]);
+
+  useEffect(() => {
+    if (nextIndex === null) return undefined;
+    const t = setTimeout(() => {
+      setCurrentIndex(nextIndex);
+      setNextIndex(null);
+    }, TRANSITION_MS);
+    return () => clearTimeout(t);
+  }, [nextIndex]);
+
+  const transitioning = nextIndex !== null;
+  const current = platformScenes[currentIndex];
+  const incoming = transitioning ? platformScenes[nextIndex] : null;
+
   return (
     <section className="fp section">
       <div className="container fp__grid">
@@ -55,94 +157,21 @@ export default function FacilityPreview() {
           </div>
         </div>
 
-        {/* Right: dashboard mock */}
-        <div className="fp__mock reveal">
-          {/* Window chrome */}
-          <div className="fp__chrome">
-            <span className="fp__chip"><span /><span /><span /></span>
-            <span className="fp__url">
-              <Icon name="shield-check" size={12} />
-              admin.locdoc.in / dashboard
-            </span>
-            <span className="fp__chrome-right">
-              <span className="fp__chrome-dot" /> Streaming
-            </span>
-          </div>
-
-          <div className="fp__body">
-            {/* Side rail */}
-            <aside className="fp__side">
-              <div className="fp__brand-mini">
-                <span className="fp__brand-mark"><Icon name="map-pin" size={12} strokeWidth={2.2} /></span>
-                LocDoc Admin
-              </div>
-              <div className="fp__facility">
-                <span>Trinity Heart Institute</span>
-                <em>Banjara Hills · verified</em>
-              </div>
-              <nav className="fp__nav">
-                <a className="is-active"><Icon name="activity" size={14} />Live queue</a>
-                <a><Icon name="calendar" size={14} />Appointments</a>
-                <a><Icon name="users" size={14} />Doctors</a>
-                <a><Icon name="storefront" size={14} />Pharmacy</a>
-                <a><Icon name="flask" size={14} />Labs</a>
-                <a><Icon name="bell" size={14} />Notifications</a>
-              </nav>
-            </aside>
-
-            {/* Main */}
-            <div className="fp__main">
-              <div className="fp__topline">
-                <div>
-                  <h4>Live queue · today</h4>
-                  <p>4 doctors on-call · 22 appointments streaming</p>
-                </div>
-                <div className="fp__pill fp__pill--ok">
-                  <span className="fp__pill-dot" /> 94% on-time this week
-                </div>
-              </div>
-
-              <div className="fp__kpis">
-                <div className="fp__kpi">
-                  <span className="fp__kpi-k">In queue</span>
-                  <span className="fp__kpi-v">18</span>
-                  <span className="fp__kpi-h">across 4 doctors</span>
-                </div>
-                <div className="fp__kpi fp__kpi--accent">
-                  <span className="fp__kpi-k">Delay alerts sent</span>
-                  <span className="fp__kpi-v">12</span>
-                  <span className="fp__kpi-h">SMS + WhatsApp · today</span>
-                </div>
-                <div className="fp__kpi">
-                  <span className="fp__kpi-k">Waitlist backfill</span>
-                  <span className="fp__kpi-v">3</span>
-                  <span className="fp__kpi-h">slots recovered</span>
-                </div>
-              </div>
-
-              <div className="fp__roster">
-                <div className="fp__roster-head">
-                  <span>Doctor</span>
-                  <span>Status</span>
-                  <span>Current slot</span>
-                </div>
-                {roster.map((r) => (
-                  <div className="fp__roster-row" key={r.init}>
-                    <div className="fp__doc">
-                      <span className="fp__avatar">{r.init}</span>
-                      <div>
-                        <strong>{r.name}</strong>
-                        <em>{r.spec}</em>
-                      </div>
-                    </div>
-                    <span className={`fp__status fp__status--${r.status}`}>
-                      <span className="fp__status-dot" /> {statusLabel[r.status]}
-                    </span>
-                    <span className="fp__slot">{r.slot}</span>
-                  </div>
-                ))}
-              </div>
+        {/* Right: dashboard mock, rotating through hospital / pharmacy / labs */}
+        <div
+          className="fp__stage reveal"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div className="fp__window">
+            <div className={`fp__mock ${transitioning ? "is-out" : ""}`}>
+              <DashboardMock scene={current} />
             </div>
+            {incoming && (
+              <div className="fp__mock fp__mock--incoming is-in">
+                <DashboardMock scene={incoming} />
+              </div>
+            )}
           </div>
         </div>
       </div>

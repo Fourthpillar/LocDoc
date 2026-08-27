@@ -1,0 +1,86 @@
+// Content for the rotating Platform Admin console preview — one scene per
+// facility type LocDoc serves, sharing the same dashboard-mock layout.
+export const platformScenes = [
+  {
+    key: "hospital",
+    facility: "Trinity Heart Institute",
+    location: "Banjara Hills · verified",
+    nav: [
+      { icon: "activity", label: "Live queue", active: true },
+      { icon: "calendar", label: "Appointments" },
+      { icon: "users", label: "Doctors" },
+      { icon: "storefront", label: "Pharmacy" },
+      { icon: "flask", label: "Labs" },
+      { icon: "bell", label: "Notifications" },
+    ],
+    topline: { title: "Live queue · today", sub: "4 doctors on-call · 22 appointments streaming" },
+    pill: "94% on-time this week",
+    kpis: [
+      { k: "In queue", v: "18", h: "across 4 doctors" },
+      { k: "Delay alerts sent", v: "12", h: "SMS + WhatsApp · today", accent: true },
+      { k: "Waitlist backfill", v: "3", h: "slots recovered" },
+    ],
+    rosterHead: ["Doctor", "Status", "Current slot"],
+    statusLabel: { "on-time": "On time", "transit": "In transit", "delayed": "Delayed" },
+    roster: [
+      { init: "AR", name: "Dr. Anjali Rao", spec: "Gynaecology", status: "on-time", slot: "In consult · 4:12 PM" },
+      { init: "KM", name: "Dr. Karthik Menon", spec: "Cardiology", status: "transit", slot: "In transit · ETA 12m" },
+      { init: "SI", name: "Dr. Sneha Iyer", spec: "Paediatrics", status: "on-time", slot: "Available · next slot 4:30" },
+      { init: "AK", name: "Dr. Ayesha Khan", spec: "Psychiatry", status: "delayed", slot: "Delayed 8m · reschedule sent" },
+    ],
+  },
+  {
+    key: "pharmacy",
+    facility: "Pharmacy",
+    location: "Jubilee Hills · verified",
+    nav: [
+      { icon: "activity", label: "Live orders", active: true },
+      { icon: "layers", label: "Inventory" },
+      { icon: "file-text", label: "Prescriptions" },
+      { icon: "calendar", label: "Reservations" },
+      { icon: "bell", label: "Notifications" },
+    ],
+    topline: { title: "Live orders · today", sub: "3 counters open · 41 orders streaming" },
+    pill: "98% stock accuracy this week",
+    kpis: [
+      { k: "In queue", v: "9", h: "across 3 counters" },
+      { k: "Low-stock alerts sent", v: "6", h: "SMS + WhatsApp · today", accent: true },
+      { k: "Reservation backfill", v: "5", h: "slots recovered" },
+    ],
+    rosterHead: ["Item", "Status", "Pickup"],
+    statusLabel: { "on-time": "Ready", "transit": "Reserved", "delayed": "Low stock" },
+    roster: [
+      { init: "PC", name: "Paracetamol 650mg", spec: "Strip of 15", status: "on-time", slot: "Ready · 12:40 PM" },
+      { init: "AZ", name: "Azithromycin 500mg", spec: "Strip of 3", status: "transit", slot: "Reserved · holds till 3 PM" },
+      { init: "VD", name: "Vitamin D3 60K", spec: "Bottle of 4", status: "on-time", slot: "Ready · 1:05 PM" },
+      { init: "OM", name: "Omeprazole 20mg", spec: "Strip of 10", status: "delayed", slot: "4 left · reorder sent" },
+    ],
+  },
+  {
+    key: "labs",
+    facility: "Diagnostics",
+    location: "Madhapur · verified",
+    nav: [
+      { icon: "activity", label: "Live queue", active: true },
+      { icon: "calendar", label: "Bookings" },
+      { icon: "file-text", label: "Reports" },
+      { icon: "users", label: "Technicians" },
+      { icon: "bell", label: "Notifications" },
+    ],
+    topline: { title: "Live queue · today", sub: "5 technicians on duty · 28 samples streaming" },
+    pill: "91% reports on time this week",
+    kpis: [
+      { k: "In queue", v: "14", h: "across 5 technicians" },
+      { k: "Delay alerts sent", v: "8", h: "SMS + WhatsApp · today", accent: true },
+      { k: "Report backfill", v: "3", h: "slots recovered" },
+    ],
+    rosterHead: ["Test", "Status", "Report ETA"],
+    statusLabel: { "on-time": "Reported", "transit": "Processing", "delayed": "Delayed" },
+    roster: [
+      { init: "CB", name: "CBC Test", spec: "Fasting required", status: "on-time", slot: "Reported · 9:40 AM" },
+      { init: "LF", name: "Liver Function", spec: "Fasting required", status: "transit", slot: "Processing · ETA 2h" },
+      { init: "TF", name: "Thyroid Profile", spec: "Walk-in", status: "on-time", slot: "Reported · 11:10 AM" },
+      { init: "XR", name: "Chest X-Ray", spec: "Walk-in", status: "delayed", slot: "Delayed · reschedule sent" },
+    ],
+  },
+];
