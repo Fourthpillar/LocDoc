@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import LabTestCard from "../components/LabTestCard.jsx";
 import Modal from "../components/Modal.jsx";
+import PageHero from "../components/PageHero.jsx";
 import { labTests } from "../data/labTests.js";
 import "./FindDoctors.css";
 
@@ -39,28 +40,21 @@ export default function LabTests() {
 
   return (
     <div className="find-doctors">
-      <div className="find-doctors__hero">
-        <div className="container">
-          <div className="eyebrow">
-            <span className="dot" />
-            Book lab tests
-          </div>
-          <h1 className="h2">Compare tests and packages before you book</h1>
-          <p className="lede mt-16">
-            Search diagnostic labs near you, compare prices and turnaround times, and book a
-            sample-collection or visit slot — results come back as a verified report.
-          </p>
-
-          <div className="find-doctors__search">
-            <Icon name="search" size={18} />
-            <input
-              placeholder="Search tests or labs"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
+      <PageHero
+        variant="labs"
+        eyebrow="Book lab tests"
+        title="Compare tests and packages before you book"
+        lede="Search diagnostic labs near you, compare prices and turnaround times, and book a sample-collection or visit slot — results come back as a verified report."
+      >
+        <div className="find-doctors__search">
+          <Icon name="search" size={18} />
+          <input
+            placeholder="Search tests or labs"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
-      </div>
+      </PageHero>
 
       <div className="container find-doctors__body">
         <div className="find-doctors__toolbar">

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Hero from "../components/home/Hero.jsx";
+import TrustMetrics from "../components/home/TrustMetrics.jsx";
 import ServicePillars from "../components/home/ServicePillars.jsx";
 import SpecialtiesGrid from "../components/SpecialtiesGrid.jsx";
 import TopClinics from "../components/TopClinics.jsx";
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustMetrics />
       <ServicePillars />
       <SpecialtiesGrid />
       <TopClinics limit={4} />

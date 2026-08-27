@@ -1,48 +1,200 @@
+/* ============================================================
+   How it works — animated flow diagram
+   ============================================================ */
+.how-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding-top: 60px; /* room for the rail */
+}
+
+/* animated rail across the top */
+.how-flow__rail {
+  position: absolute;
+  top: 33px;         /* aligns to the middle of the icon nodes */
+  left: 8%;
+  right: 8%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-strong);
+  overflow: visible;
+  z-index: 0;
+}
+.how-flow__rail-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.45);
+}
+.how-flow__pulse {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  border: 3px solid var(--primary);
+  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5);
+  animation: how-pulse 1.6s ease-in-out infinite;
+  transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes how-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
+  50%      { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+}
+
+/* each step */
+.how-flow__step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 12px 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.how-flow__step:hover { transform: translateY(-4px); }
+
+.how-flow__num {
+  position: absolute;
+  top: -46px;
+  right: 20%;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  letter-spacing: 0.08em;
+  background: var(--surface);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  opacity: 0.9;
+}
+
+.how-flow__node {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 22px;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease;
+  margin-bottom: 22px;
+}
+
+.how-flow__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+  transition: color 0.3s ease;
+}
+
+.how-flow__desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  max-width: 26ch;
+  margin: 0 auto;
+}
+
+/* past = done, active = current, others = future */
+.how-flow__step.is-past .how-flow__node {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary-2);
+}
+.how-flow__step.is-active .how-flow__node {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: var(--shadow-brand), var(--shadow-md);
+}
+.how-flow__step.is-active .how-flow__title { color: var(--primary-2); }
+.how-flow__step.is-active .how-flow__num {
+  color: var(--primary-2);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+/* Responsive: turn into a vertical timeline on small screens */
+@media (max-width: 900px) {
+  .how-flow {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-top: 0;
+  }
+  .how-flow__rail {
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
+  .how-flow__rail-fill {
+    inset: 0 0 auto 0;
+    width: 100% !important;
+    height: 0;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .how-flow__pulse { display: none; }
+
+  .how-flow__step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    padding: 8px 0 8px 80px;
+    position: relative;
+    gap: 0;
+  }
+  .how-flow__num {
+    position: static;
+    order: 3;
+    align-self: center;
+    margin-left: auto;
+  }
+  .how-flow__node {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+  }
+  .how-flow__desc { max-width: none; }
+}
+
+/* Vertical rail fill uses a custom prop set inline in JSX. Fallback stays hidden by width setting above. */
+@media (max-width: 900px) {
+  .how-flow__rail-fill { height: var(--vfill, 0%); }
+}
+
+/* Older mixed-flex fallback */
 .how__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-}
-
-.how__step {
-  position: relative;
-  padding: 28px 22px;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.how__num {
-  position: absolute;
-  top: 10px;
-  right: 16px;
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: var(--border-strong);
-  line-height: 1;
-}
-
-.how__icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--gradient-brand);
-  color: #fff;
-  margin-bottom: 18px;
-  position: relative;
-}
-
-@media (max-width: 980px) {
-  .how__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 560px) {
-  .how__grid {
-    grid-template-columns: 1fr;
-  }
 }

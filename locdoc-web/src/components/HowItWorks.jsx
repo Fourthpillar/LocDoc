@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon.jsx";
 import "./HowItWorks.css";
 
@@ -24,9 +25,35 @@ const steps = [
   },
 ];
 
+const CYCLE_MS = 2400;
+
 export default function HowItWorks() {
+  const sectionRef = useRef(null);
+  const [active, setActive] = useState(0);
+  const [visible, setVisible] = useState(false);
+
+  // start the cycle only once the section is on-screen (so it feels alive when read)
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return undefined;
+    const id = setInterval(() => setActive((a) => (a + 1) % steps.length), CYCLE_MS);
+    return () => clearInterval(id);
+  }, [visible]);
+
+  const progress = ((active + 0.5) / steps.length) * 100;
+
   return (
-    <section className="how section section--tight" id="how-it-works">
+    <section className="how section section--tight" id="how-it-works" ref={sectionRef}>
       <div className="container">
         <div className="section-head reveal">
           <div className="eyebrow">
@@ -36,16 +63,29 @@ export default function HowItWorks() {
           <h2 className="h2">From search to seen — without the guesswork.</h2>
         </div>
 
-        <div className="how__grid reveal">
+        {/* Animated flow diagram */}
+        <div className="how-flow reveal" role="list">
+          <div className="how-flow__rail" aria-hidden="true">
+            <div className="how-flow__rail-fill" style={{ width: `${progress}%` }} />
+            <span className="how-flow__pulse" style={{ left: `${progress}%` }} />
+          </div>
+
           {steps.map((s, i) => (
-            <div className="how__step" key={s.title}>
-              <span className="how__num">{String(i + 1).padStart(2, "0")}</span>
-              <div className="how__icon">
-                <Icon name={s.icon} size={20} />
-              </div>
-              <h3 className="h3">{s.title}</h3>
-              <p className="body-text mt-8">{s.desc}</p>
-            </div>
+            <button
+              type="button"
+              role="listitem"
+              key={s.title}
+              className={`how-flow__step ${i === active ? "is-active" : ""} ${i < active ? "is-past" : ""}`}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+            >
+              <span className="how-flow__num">{String(i + 1).padStart(2, "0")}</span>
+              <span className="how-flow__node">
+                <Icon name={s.icon} size={22} />
+              </span>
+              <h3 className="how-flow__title">{s.title}</h3>
+              <p className="how-flow__desc">{s.desc}</p>
+            </button>
           ))}
         </div>
       </div>

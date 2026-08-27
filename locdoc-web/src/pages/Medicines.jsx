@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import MedicineCard from "../components/MedicineCard.jsx";
 import Modal from "../components/Modal.jsx";
+import PageHero from "../components/PageHero.jsx";
 import { medicines } from "../data/medicines.js";
 import "./FindDoctors.css";
 
@@ -43,28 +44,21 @@ export default function Medicines() {
 
   return (
     <div className="find-doctors">
-      <div className="find-doctors__hero">
-        <div className="container">
-          <div className="eyebrow">
-            <span className="dot" />
-            Find medicines
-          </div>
-          <h1 className="h2">Check who actually has it in stock</h1>
-          <p className="lede mt-16">
-            Search nearby pharmacies before you travel. Every listing shows a live-updated stock
-            status, so you're not chasing a medicine that's already sold out.
-          </p>
-
-          <div className="find-doctors__search">
-            <Icon name="search" size={18} />
-            <input
-              placeholder="Search medicines or pharmacies"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
+      <PageHero
+        variant="medicines"
+        eyebrow="Find medicines"
+        title="Check who actually has it in stock"
+        lede="Search nearby pharmacies before you travel. Every listing shows a live-updated stock status, so you're not chasing a medicine that's already sold out."
+      >
+        <div className="find-doctors__search">
+          <Icon name="search" size={18} />
+          <input
+            placeholder="Search medicines or pharmacies"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
-      </div>
+      </PageHero>
 
       <div className="container find-doctors__body">
         <div className="find-doctors__chips">

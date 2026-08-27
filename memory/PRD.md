@@ -34,6 +34,11 @@ LocDoc is a marketing/product website for a SaaS healthcare platform designed to
 - ✅ Folder structure untouched.
 - ✅ "Patient" label rule respected (used only as an auth role internally; not surfaced as marketing copy).
 
+### Follow-up enhancements (Jan 2026, second pass)
+- ✅ **Trust Metrics Band** (`components/home/TrustMetrics.jsx` + `.css`) — live-styled stats row inserted between the Hero and Service Pillars on Home. Four metrics (Appointments tracked, Cities live, Verified doctors, On-time rate) with count-up animation triggered by IntersectionObserver, alternating blue/teal accents, live pulse caption.
+- ✅ **Distinct page-hero illustrations** (`components/PageHero.jsx` + `.css`) — inline SVG art per search variant: `doctors` (doctor card, stethoscope, verified shield), `medicines` (pill bottle, tilted capsule, in-stock chip, floating pills), `labs` (report card with pass/pending rows, flask with gradient liquid, "Report in 6 h" chip). Wired into `pages/FindDoctors.jsx`, `pages/Medicines.jsx`, `pages/LabTests.jsx`. Each page now has a unique first impression.
+- ✅ **Animated How It Works diagram** (`components/HowItWorks.jsx` + `.css` rewritten) — horizontal step rail with a gradient fill line and a pulsing marker that auto-walks through the 4 steps every 2.4 s when the section is in the viewport; active node lifts, colours in brand, hover/focus lets user drive the animation. Falls back to a vertical timeline on mobile.
+
 ## Verified pages (via screenshots)
 Home hero · Home services · Home specialties · Home clinics · Home verification · Home register · Doctors listing · Login · Register facility · About.
 

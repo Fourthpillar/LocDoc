@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import DoctorCard from "../components/DoctorCard.jsx";
 import Modal from "../components/Modal.jsx";
+import PageHero from "../components/PageHero.jsx";
 import { doctors } from "../data/doctors.js";
 import { specialties } from "../data/specialties.js";
 import { clinics } from "../data/clinics.js";
@@ -64,30 +65,21 @@ export default function FindDoctors() {
 
   return (
     <div className="find-doctors">
-      <div className="find-doctors__hero">
-        <div className="container">
-          <div className="eyebrow">
-            <span className="dot" />
-            {clinic ? clinic.name : "Find doctors"}
-          </div>
-          <h1 className="h2">
-            {clinic ? `Doctors at ${clinic.name}` : "Search verified doctors near you"}
-          </h1>
-          <p className="lede mt-16">
-            Every profile below is registration-verified. Punctuality is shown in plain language,
-            not buried in fine print.
-          </p>
-
-          <div className="find-doctors__search">
-            <Icon name="search" size={18} />
-            <input
-              placeholder="Search by doctor, specialty or clinic"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
+      <PageHero
+        variant="doctors"
+        eyebrow={clinic ? clinic.name : "Find doctors"}
+        title={clinic ? `Doctors at ${clinic.name}` : "Search verified doctors near you"}
+        lede="Every profile below is registration-verified. Punctuality is shown in plain language, not buried in fine print."
+      >
+        <div className="find-doctors__search">
+          <Icon name="search" size={18} />
+          <input
+            placeholder="Search by doctor, specialty or clinic"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
-      </div>
+      </PageHero>
 
       <div className="container find-doctors__body">
         <div className="find-doctors__chips">

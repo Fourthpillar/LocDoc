@@ -1,0 +1,59 @@
+.page-hero {
+  padding: 56px 0 40px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: -40% -20% auto -20%;
+  height: 90%;
+  background: radial-gradient(closest-side, var(--primary-soft), transparent 70%);
+  filter: blur(60px);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 0;
+}
+.page-hero--medicines::before {
+  background: radial-gradient(closest-side, var(--accent-soft), transparent 70%);
+}
+.page-hero--labs::before {
+  background:
+    radial-gradient(closest-side at 40% 40%, var(--primary-soft), transparent 70%),
+    radial-gradient(closest-side at 70% 60%, var(--accent-soft), transparent 70%);
+}
+
+.page-hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.page-hero__copy { max-width: 560px; }
+.page-hero__title { letter-spacing: -0.03em; }
+.page-hero__lede { max-width: 52ch; }
+
+.page-hero__extra { margin-top: 26px; }
+
+.page-hero__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-hero__art {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  filter: drop-shadow(0 24px 44px rgba(15, 27, 44, 0.10));
+}
+
+@media (max-width: 900px) {
+  .page-hero__grid { grid-template-columns: 1fr; gap: 30px; }
+  .page-hero__visual { order: -1; }
+  .page-hero__art { max-width: 300px; }
+}
