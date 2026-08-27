@@ -21,31 +21,31 @@
   --text-soft: #7d8a99;
   --text-on-primary: #ffffff;
 
-  /* One brand color — fresh green + a warm coral accent used sparingly */
-  --primary: #16a34a;
-  --primary-2: #15803d;
-  --primary-soft: #dcfce7;
-  --primary-ink: #052e14;
+  /* Trust Blue primary + Warm Teal accent (healthcare trust) */
+  --primary: #2563eb;
+  --primary-2: #1d4ed8;
+  --primary-soft: #dbeafe;
+  --primary-ink: #0b1e4a;
 
-  --accent: #ff6b5c;
-  --accent-soft: #ffe4e0;
+  --accent: #0891b2;
+  --accent-soft: #cffafe;
 
-  --success: #16a34a;
-  --success-bg: #dcfce7;
+  --success: #059669;
+  --success-bg: #d1fae5;
   --warning: #ea8a00;
   --warning-bg: #fff4e0;
   --danger: #dc2626;
   --danger-bg: #fee2e2;
 
-  --gradient-brand: none;
-  --gradient-brand-soft: none;
-  --gradient-accent: none;
+  --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(37, 99, 235, 0.10) 0%, rgba(8, 145, 178, 0.10) 100%);
+  --gradient-accent: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
 
   --shadow-xs: 0 1px 2px rgba(15, 27, 44, 0.04);
   --shadow-sm: 0 4px 14px -4px rgba(15, 27, 44, 0.08);
   --shadow-md: 0 18px 44px -18px rgba(15, 27, 44, 0.18);
   --shadow-lg: 0 36px 80px -28px rgba(15, 27, 44, 0.22);
-  --shadow-brand: 0 20px 50px -18px rgba(22, 163, 74, 0.45);
+  --shadow-brand: 0 20px 50px -18px rgba(37, 99, 235, 0.45);
   --glow-primary: 0 0 0 rgba(0, 0, 0, 0);
 
   /* Rounded generous radii */
@@ -80,19 +80,23 @@
   --text-soft: #6b7891;
   --text-on-primary: #ffffff;
 
-  --primary: #22c55e;
-  --primary-2: #16a34a;
-  --primary-soft: rgba(34, 197, 94, 0.16);
-  --primary-ink: #052e14;
+  --primary: #60a5fa;
+  --primary-2: #3b82f6;
+  --primary-soft: rgba(96, 165, 250, 0.16);
+  --primary-ink: #0b1e4a;
 
-  --accent: #ff7d70;
-  --accent-soft: rgba(255, 125, 112, 0.14);
+  --accent: #22d3ee;
+  --accent-soft: rgba(34, 211, 238, 0.14);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-sm: 0 4px 16px -4px rgba(0, 0, 0, 0.55);
   --shadow-md: 0 22px 50px -22px rgba(0, 0, 0, 0.7);
   --shadow-lg: 0 40px 90px -32px rgba(0, 0, 0, 0.85);
-  --shadow-brand: 0 22px 60px -22px rgba(34, 197, 94, 0.45);
+  --shadow-brand: 0 22px 60px -22px rgba(96, 165, 250, 0.45);
+
+  --gradient-brand: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(96, 165, 250, 0.14) 0%, rgba(34, 211, 238, 0.14) 100%);
+  --gradient-accent: linear-gradient(135deg, #22d3ee 0%, #60a5fa 100%);
 }
 
 /* Reset */
