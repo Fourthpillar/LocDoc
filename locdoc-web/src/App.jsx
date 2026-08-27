@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import SalesChat from "./components/SalesChat.jsx";
 import Home from "./pages/Home.jsx";
 import FindDoctors from "./pages/FindDoctors.jsx";
 import DoctorDetail from "./pages/DoctorDetail.jsx";
@@ -51,6 +52,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <SalesChat />
     </div>
   );
 }
